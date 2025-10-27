@@ -1,36 +1,118 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🧠 AI Resume & Job Description Matcher  
 
-## Getting Started
+An **AI-driven web application** that intelligently evaluates how well a candidate’s resume matches a given job description using **semantic similarity** powered by **Natural Language Processing (NLP)**.  
 
-First, run the development server:
+This project integrates the **Next.js full-stack framework** (handling both frontend & backend) with a **FastAPI-based NLP microservice** that leverages **Sentence-BERT (SBERT)** to compute similarity scores between candidate profiles and job postings.  
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+It’s designed to help recruiters quickly identify the best candidates and allow job seekers to understand how well their resumes align with job roles — making the recruitment process faster, fairer, and data-driven.  
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+---
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 🚀 Key Highlights  
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- ⚡ **Full-Stack Next.js Application:** A unified web app where frontend and backend APIs are managed in one framework.  
+- 🧠 **AI-Powered Matching:** Uses Sentence-BERT embeddings to measure how similar a resume is to a job description in terms of context, skills, and experience.  
+- 📄 **Resume Text Extraction:** Automatically extracts text from PDF or DOCX resumes using Python libraries like `PyMuPDF` and `python-docx`.  
+- 🔍 **Semantic Scoring:** Computes cosine similarity between embeddings of resumes and job descriptions to generate match percentages.  
+- 📊 **Recruiter Dashboard:** Displays ranked candidate-job match scores for better hiring insights.  
+- 💾 **Cloud Integration:** Supports cloud storage (AWS S3 / Cloudinary) for resume uploads.  
+- 🔐 **Authentication (Optional):** JWT-based login for recruiters and applicants.  
 
-## Learn More
+---
 
-To learn more about Next.js, take a look at the following resources:
+## 🧩 Core Architecture  
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+          ┌────────────────────────────┐
+          │         Next.js App        │
+          │  • Resume Upload Page       │
+          │  • Job Description Input    │
+          │  • Match Dashboard          │
+          │  • API Routes (Backend)     │
+          └──────────────┬─────────────┘
+                         │
+                         ▼
+          ┌────────────────────────────┐
+          │     FastAPI NLP Service    │
+          │  • Sentence-BERT Model      │
+          │  • Resume Parsing           │
+          │  • Similarity Scoring       │
+          └──────────────┬─────────────┘
+                         │
+                         ▼
+          ┌────────────────────────────┐
+          │        MongoDB Atlas        │
+          │  • Users / Resumes / Jobs    │
+          │  • Embeddings / Scores       │
+          └────────────────────────────┘
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+---
 
-## Deploy on Vercel
+## 🧠 How It Works  
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+1. **Resume Upload:**  
+   The user uploads a resume file (PDF/DOCX). The system extracts text using Python libraries.  
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+2. **Job Description Input:**  
+   Recruiters or users paste or upload a job description.  
+
+3. **Embedding Generation:**  
+   Both texts (resume & job) are encoded using **Sentence-BERT**, generating high-dimensional vectors that capture semantic meaning.  
+
+4. **Similarity Calculation:**  
+   Cosine similarity between vectors determines the **match score** (0–100%).  
+
+5. **Ranking & Display:**  
+   Results are displayed in a modern Next.js dashboard, highlighting top matches with visualization and filters.  
+
+---
+
+## 💻 Example Output  
+
+| Candidate | Job Title | Match Score |
+|------------|------------|--------------|
+| Rahul D. | Machine Learning Engineer | 89.7% |
+| Ritika O. | Data Analyst | 77.3% |
+| Shruti S. | Backend Developer | 71.5% |
+
+---
+
+## 🧾 Tech Stack Overview  
+
+| Component | Technology |
+|------------|-------------|
+| **Frontend & Backend** | Next.js 15, TypeScript, TailwindCSS, Framer Motion |
+| **Database** | MongoDB Atlas |
+| **NLP Microservice** | Python, FastAPI, Sentence-BERT |
+| **Resume Parsing** | PyMuPDF, python-docx |
+| **Deployment** | Vercel (Next.js App), Render/Railway (NLP API), Hugging Face Spaces (Model Hosting) |
+
+---
+
+## 📚 Use Cases  
+
+- 🔹 **Recruiters:** Automatically rank resumes for faster shortlisting.  
+- 🔹 **Job Seekers:** Check how well your resume matches specific roles.  
+- 🔹 **Career Platforms:** Integrate AI-based resume matching for smarter recommendations.  
+
+---
+
+## 🤝 Let's Connect  
+
+Hey there! 👋 I'm **Rahul Dohare**, a passionate **Full Stack Developer** and **AI/ML Enthusiast** who loves building intelligent systems that make life easier — one project at a time.  
+If this project inspired you or helped you learn something new, let’s connect! 🚀  
+
+- 🐦 **Twitter:** [@mr_psychocyborg](https://twitter.com/mr_psychocyborg)  
+- 🌐 **Portfolio:** [rahul-dohare-portfolio.vercel.app](https://rahul-dohare-portfolio.vercel.app/)  
+- 💌 **Mail:** [psychocyborg007@gmail.com](mailto:psychocyborg007@gmail.com)  
+
+---
+
+## ⭐️ Star This Repository  
+
+If you found **AI Resume & Job Description Matcher** useful or interesting, please consider giving it a **⭐️** — it really motivates me to keep building open-source AI tools and sharing more with the community! 🙌  
+
+---
+
+> 💡 *“Build. Learn. Share. Repeat. Growth happens when you create in public — let’s keep coding smarter together!”*  
+
+### — ✨ *Rahul Dohare*  
