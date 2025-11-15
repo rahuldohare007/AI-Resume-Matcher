@@ -123,7 +123,6 @@ body {
   }
 } */
 
-
 @layer base {
   :root {
     --background: 0 0% 100%;
@@ -169,11 +168,20 @@ body {
     --input: 217.2 32.6% 17.5%;
     --ring: 224.3 76.3% 48%;
   }
-
+  /* react-hot-toast */
+  .hot-toast {
+    background: #fff;
+    color: #111827;
+    border-color: #e5e7eb;
+  }
+  .dark .hot-toast {
+    background: #0b1220;
+    color: #e5e7eb;
+    border-color: #374151;
+  }
   body {
     background-color: hsl(var(--background));
     color: hsl(var(--foreground));
     font-feature-settings: "rlig" 1, "calt" 1;
   }
 }
-
