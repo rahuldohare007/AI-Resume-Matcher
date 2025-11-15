@@ -1,61 +1,50 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { downloadFromCloudinary } from '@/lib/cloudinary'
 import { createResume } from '@/lib/db-utils'
 
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json()
-    const { candidateName, email, fileUrl, cloudinaryPublicId, fileFormat, fileName } = body
+    const { 
+      candidateName, 
+      email, 
+      fileUrl, 
+      cloudinaryPublicId, 
+      fileFormat, 
+      fileName,
+      extractedText  // ✅ Received from frontend
+    } = body
+
+    console.log('📝 Upload request received for:', candidateName)
 
     // Validation
     if (!candidateName || !email || !fileUrl) {
       return NextResponse.json(
-        { success: false, message: 'Missing required fields' },
+        { success: false, message: 'Missing required fields: candidateName, email, or fileUrl' },
         { status: 400 }
       )
     }
 
-    // Validate email
+    // Validate email format
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
     if (!emailRegex.test(email)) {
       return NextResponse.json(
-        { success: false, message: 'Invalid email address' },
+        { success: false, message: 'Invalid email address format' },
         { status: 400 }
       )
     }
 
-    let extractedText = ''
+    // Use extracted text from frontend
+    const textToSave = extractedText || ''
 
-    // Try to extract text from resume using NLP service
-    try {
-      console.log('📥 Downloading file from Cloudinary...')
-      const fileBuffer = await downloadFromCloudinary(fileUrl)
-      console.log(`✅ Downloaded ${fileBuffer.length} bytes`)
-
-      console.log('🔍 Extracting text from resume...')
-      const nlpFormData = new FormData()
-      nlpFormData.append('file', new Blob([fileBuffer]), `${fileName}.${fileFormat}`)
-
-      const nlpResponse = await fetch(`${process.env.NLP_SERVICE_URL}/extract-text`, {
-        method: 'POST',
-        body: nlpFormData,
-      })
-
-      if (nlpResponse.ok) {
-        const nlpData = await nlpResponse.json()
-        extractedText = nlpData.text || ''
-        console.log(`✅ Extracted ${extractedText.length} characters`)
-      } else {
-        const errorText = await nlpResponse.text()
-        console.error('NLP service error:', errorText)
-      }
-    } catch (nlpError) {
-      console.error('Text extraction error:', nlpError)
-      // Continue even if text extraction fails
+    if (!textToSave || textToSave.trim().length === 0) {
+      console.warn('⚠️  No extracted text provided')
+    } else {
+      console.log(`✅ Extracted text received: ${textToSave.length} characters`)
     }
 
     // Save to database
-    console.log('💾 Saving to database...')
+    console.log('💾 Saving resume to database...')
+    
     const resumeData = {
       candidateName,
       email,
@@ -63,11 +52,11 @@ export async function POST(request: NextRequest) {
       cloudinaryPublicId,
       fileFormat,
       fileName,
-      extractedText,
+      extractedText: textToSave,
     }
 
     const result = await createResume(resumeData)
-    console.log('✅ Resume saved successfully')
+    console.log(`✅ Resume saved successfully with ID: ${result.insertedId.toString()}`)
 
     return NextResponse.json({
       success: true,
@@ -75,13 +64,33 @@ export async function POST(request: NextRequest) {
       data: {
         resumeId: result.insertedId.toString(),
         fileUrl,
-        extractedText: extractedText ? extractedText.substring(0, 200) + '...' : 'No text extracted',
+        extractedText: textToSave ? `${textToSave.substring(0, 150)}...` : 'No text extracted',
         candidateName,
         email,
+        hasText: textToSave.length > 0,
+        textLength: textToSave.length,
       },
     })
+
   } catch (error) {
     console.error('❌ Upload error:', error)
+    
+    // Specific error handling
+    if (error instanceof Error) {
+      // MongoDB connection errors
+      if (error.message.includes('ENOTFOUND') || 
+          error.message.includes('SSL') || 
+          error.message.includes('MongoServerSelectionError')) {
+        return NextResponse.json(
+          { 
+            success: false, 
+            message: 'Database connection failed. Please check MongoDB connection and try again.' 
+          },
+          { status: 500 }
+        )
+      }
+    }
+    
     return NextResponse.json(
       { 
         success: false, 
