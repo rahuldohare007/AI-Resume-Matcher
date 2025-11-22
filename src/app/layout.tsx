@@ -94,7 +94,8 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={`${outfit.className} min-h-screen flex flex-col`}>
+      {/* <body className={`${outfit.className} min-h-screen flex flex-col`}> */}
+        <body className={`${outfit.className} min-h-screen flex flex-col bg-gradient-to-br from-[hsl(var(--background))] via-white to-zinc-50 dark:via-transparent dark:to-transparent`}>
         <Providers>
           <Navigation />
           <ToastProvider />

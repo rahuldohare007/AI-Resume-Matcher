@@ -11,16 +11,16 @@
 //           <Zap className="w-4 h-4" />
 //           <span className="text-sm font-medium">AI-Powered Recruitment</span>
 //         </div>
-        
+
 //         <h1 className="text-5xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
 //           Match Resumes to Jobs with AI Precision
 //         </h1>
-        
+
 //         <p className="text-xl text-gray-600 mb-8">
-//           Leverage Sentence-BERT embeddings to find the perfect candidate-job fit. 
+//           Leverage Sentence-BERT embeddings to find the perfect candidate-job fit.
 //           Make data-driven hiring decisions in seconds, not hours.
 //         </p>
-        
+
 //         {/* Action Buttons */}
 //         <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-12">
 //           <Link href="/upload">
@@ -119,9 +119,16 @@
 //   )
 // }
 
-import Link from "next/link"
-import { Button } from "@/components/ui/button"
-import { Brain, Zap, Target, TrendingUp, ArrowRight, Sparkles } from "lucide-react"
+import Link from "next/link";
+import { Button } from "@/components/ui/button";
+import {
+  Brain,
+  Zap,
+  Target,
+  TrendingUp,
+  ArrowRight,
+  Sparkles,
+} from "lucide-react";
 
 export default function Home() {
   return (
@@ -132,15 +139,38 @@ export default function Home() {
           <span className="text-sm font-semibold">AI-Powered Recruitment</span>
         </div>
 
-        <h1 className="text-5xl md:text-7xl font-extrabold mb-6 bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent leading-tight">
-          Match Resumes to Jobs with AI Precision
+        {/* <h1 className="text-5xl md:text-7xl font-extrabold mb-6 tracking-tight leading-tight">
+          Match Resumes to Jobs
+          <br />
+          <span className="bg-gradient-to-r from-indigo-600 to-violet-600 bg-clip-text text-transparent">
+            with AI Precision
+          </span>
+        </h1> */}
+
+        <h1 className="text-5xl md:text-7xl font-extrabold tracking-tight leading-tight">
+          <span className="text-gray-900 dark:text-white">
+            Match Resumes to Jobs
+          </span>
+          <br />
+          <span className="text-indigo-600 dark:text-indigo-400">
+            with AI Precision
+          </span>
         </h1>
 
         <p className="text-xl md:text-2xl text-gray-700 dark:text-gray-300 mb-10 leading-relaxed">
-          Leverage <span className="font-semibold text-purple-600 dark:text-purple-400">Sentence-BERT</span> embeddings to find the perfect candidate-job fit. Make data-driven hiring decisions in <span className="font-semibold text-blue-600 dark:text-blue-400">seconds</span>, not hours.
+          Leverage{" "}
+          <span className="font-semibold text-purple-600 dark:text-purple-400">
+            Sentence-BERT
+          </span>{" "}
+          embeddings to find the perfect candidate-job fit. Make data-driven
+          hiring decisions in{" "}
+          <span className="font-semibold text-blue-600 dark:text-blue-400">
+            seconds
+          </span>
+          , not hours.
         </p>
 
-        <Link href="/upload">
+        {/* <Link href="/upload">
           <Button
             size="lg"
             className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white text-lg px-8 py-6 rounded-xl shadow-2xl hover:shadow-purple-500/30 transition-all transform hover:scale-105"
@@ -148,6 +178,18 @@ export default function Home() {
             <Sparkles className="w-5 h-5 mr-2" />
             Get Started
             <ArrowRight className="w-5 h-5 ml-2" />
+          </Button>
+        </Link> */}
+        <Link href="/upload">
+          <Button
+            size="lg"
+            className="group relative overflow-hidden bg-indigo-600 hover:bg-indigo-700 text-white font-semibold text-lg px-9 py-7 rounded-xl shadow-xl hover:shadow-2xl hover:shadow-indigo-600/40 transition-all duration-300 transform hover:scale-105"
+          >
+            {/* Subtle inner glow */}
+            <span className="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-300" />
+            <Sparkles className="w-5 h-5 mr-2.5 group-hover:rotate-12 transition-transform" />
+            Get Started
+            <ArrowRight className="w-5 h-5 ml-2.5 group-hover:translate-x-1 transition-transform" />
           </Button>
         </Link>
       </div>
@@ -157,9 +199,12 @@ export default function Home() {
           <div className="w-16 h-16 bg-gradient-to-br from-blue-500 to-blue-600 rounded-2xl flex items-center justify-center mb-4">
             <Brain className="w-8 h-8 text-white" />
           </div>
-          <h3 className="text-2xl font-bold mb-3 text-gray-900 dark:text-white">AI-Powered Matching</h3>
+          <h3 className="text-2xl font-bold mb-3 text-gray-900 dark:text-white">
+            AI-Powered Matching
+          </h3>
           <p className="text-gray-600 dark:text-gray-300 leading-relaxed">
-            Uses Sentence-BERT to understand semantic similarity between resumes and job descriptions
+            Uses Sentence-BERT to understand semantic similarity between resumes
+            and job descriptions
           </p>
         </div>
 
@@ -167,9 +212,12 @@ export default function Home() {
           <div className="w-16 h-16 bg-gradient-to-br from-purple-500 to-purple-600 rounded-2xl flex items-center justify-center mb-4">
             <Target className="w-8 h-8 text-white" />
           </div>
-          <h3 className="text-2xl font-bold mb-3 text-gray-900 dark:text-white">Smart Ranking</h3>
+          <h3 className="text-2xl font-bold mb-3 text-gray-900 dark:text-white">
+            Smart Ranking
+          </h3>
           <p className="text-gray-600 dark:text-gray-300 leading-relaxed">
-            Automatically ranks candidates based on skills, experience, and role alignment
+            Automatically ranks candidates based on skills, experience, and role
+            alignment
           </p>
         </div>
 
@@ -177,12 +225,15 @@ export default function Home() {
           <div className="w-16 h-16 bg-gradient-to-br from-green-500 to-green-600 rounded-2xl flex items-center justify-center mb-4">
             <TrendingUp className="w-8 h-8 text-white" />
           </div>
-          <h3 className="text-2xl font-bold mb-3 text-gray-900 dark:text-white">Data-Driven Insights</h3>
+          <h3 className="text-2xl font-bold mb-3 text-gray-900 dark:text-white">
+            Data-Driven Insights
+          </h3>
           <p className="text-gray-600 dark:text-gray-300 leading-relaxed">
-            Visualize match scores, keyword analysis, and candidate distributions
+            Visualize match scores, keyword analysis, and candidate
+            distributions
           </p>
         </div>
       </div>
     </div>
-  )
+  );
 }
