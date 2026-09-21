@@ -96,17 +96,6 @@ It’s designed to help recruiters quickly identify the best candidates and allo
 
 ---
 
-## 🤝 Let's Connect  
-
-Hey there! 👋 I'm **Rahul Dohare**, a passionate **Full Stack Developer** and **AI/ML Enthusiast** who loves building intelligent systems that make life easier — one project at a time.  
-If this project inspired you or helped you learn something new, let’s connect! 🚀  
-
-- 🐦 **Twitter:** [@mr_psychocyborg](https://twitter.com/mr_psychocyborg)  
-- 🌐 **Portfolio:** [rahul-dohare-portfolio.vercel.app](https://rahul-dohare-portfolio.vercel.app/)  
-- 💌 **Mail:** [psychocyborg007@gmail.com](mailto:psychocyborg007@gmail.com)  
-
----
-
 ## ⭐️ Star This Repository  
 
 If you found **AI Resume & Job Description Matcher** useful or interesting, please consider giving it a **⭐️** — it really motivates me to keep building open-source AI tools and sharing more with the community! 🙌  
